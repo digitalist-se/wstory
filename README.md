@@ -1,7 +1,8 @@
-Wunderstories (http://wunderstories.meteor.com)
+Wunderstories
 ======
 
 Wunderstories Meteor Application
+http://wunderstories.meteor.com
 
 # Install Meteor
     curl https://install.meteor.com | sh
