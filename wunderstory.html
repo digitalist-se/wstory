@@ -164,22 +164,22 @@
 <template name="viewDialog">
   <div class="mask"> </div>
   <div class="modal">
+    {{#each stories}}
     <div class="modal-header">
       <button type="button" class="close cancel">&times;</button>
-      <h3>View story</h3>
+      <h3>{{name}}</h3>
     </div>
 
     <div class="modal-body">
-      {{#each stories}}
 
-      <label>Titel</label>
-      <input type="text" class="title span5" value="{{name}}">
+      <p class="description">{{desc}}</p>
 
-      <label>Beskrivning</label>
-      <textarea class="description span5">{{desc}}</textarea>
+      <strong>Ansvarig:</strong>
+      <p>{{resp}}</p>
 
-      <label>Utfall</label>
-      <input type="text" class="title span5" value="{{value}}">
+
+      <strong>Utfall</strong>
+      <p>{{value}} h</p>
 
       {{/each}}
     </div>
