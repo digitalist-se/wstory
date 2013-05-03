@@ -1,5 +1,7 @@
 
-Meteor.subscribe("stories");
+Stories = new Meteor.Collection("stories");
+
+var storiesHandle = Meteor.subscribe('stories');
 
 Template.navigation.events({
   'click button' : function () {
@@ -10,12 +12,31 @@ Template.navigation.events({
   }
 });
 
+Template.main.events({
+  'click tr' : function(event) {
+    Session.set('selected', this._id);
+    openViewDialog();
+  }
+});
+
 var openCreateDialog = function () {
   Session.set("showCreateDialog", true);
 };
 
 Template.modals.showCreateDialog = function () {
   return Session.get("showCreateDialog");
+};
+
+var openViewDialog = function () {
+  Session.set("showViewDialog", true);
+};
+
+Template.modals.showViewDialog = function () {
+  return Session.get("showViewDialog");
+};
+
+Template.main.stories = function () {
+  return Stories.find({}, {sort: {value: 1}});
 };
 
 
@@ -52,6 +73,15 @@ Template.createDialog.events({
   }
 });
 
-Template.createDialog.error = function () {
-  return Session.get("createError");
+Template.viewDialog.stories = function () {
+  return Stories.find(Session.get("selected"));
 };
+
+Template.viewDialog.events({
+  'click .save': function (event, template) {
+  },
+
+  'click .cancel': function () {
+    Session.set("showViewDialog", false);
+  }
+});

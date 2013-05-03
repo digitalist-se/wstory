@@ -1,5 +1,5 @@
 Meteor.startup(function () {
-  if (Stories.find().count === 0) {
+  if (Stories.find().count() === 0) {
     var data = [
       {name: "Meteor Principles",
        desc: "Initial data for a story, example data.",
@@ -14,13 +14,9 @@ Meteor.startup(function () {
        value: 1
       }
     ];
-    var timestamp = (new Date()).getTime();
+
     for (var i = 0; i < data.length; i++) {
-      var stories_id = Stories.insert({
-        name: data[i].name,
-        desc: data[i].desc,
-        value: data[i].value
-      });
+      var stories_id = Stories.insert(data[i]);
     }
   }
 });

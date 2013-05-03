@@ -12,6 +12,9 @@
   {{#if showCreateDialog}}
     {{> createDialog}}
   {{/if}}
+  {{#if showViewDialog}}
+    {{> viewDialog}}
+  {{/if}}
 </template>
 
 <template name="main">
@@ -27,12 +30,14 @@
         </tr>
       </thead>
       <tbody>
+        {{#each stories}}
         <tr>
           <td>1</td>
-          <td>Lipsum</td>
-          <td>Lorem ipsum dolar sit amet</td>
-          <td>4</td>
+          <td>{{name}}</td>
+          <td>{{desc}}</td>
+          <td>{{value}}</td>
         </tr>
+        {{/each}}
       </tbody>
     </table>
   </section>
@@ -85,6 +90,36 @@
     <div class="modal-footer">
       <a href="#" class="btn cancel">Cancel</a>
       <a href="#" class="btn btn-primary save">Add party</a>
+    </div>
+  </div>
+</template>
+
+<template name="viewDialog">
+  <div class="mask"> </div>
+  <div class="modal">
+    <div class="modal-header">
+      <button type="button" class="close cancel">&times;</button>
+      <h3>View story</h3>
+    </div>
+
+    <div class="modal-body">
+      {{#each stories}}
+
+      <label>Titel</label>
+      <input type="text" class="title span5" value="{{name}}">
+
+      <label>Beskrivning</label>
+      <textarea class="description span5">{{desc}}</textarea>
+
+      <label>Utfall</label>
+      <input type="text" class="title span5" value="{{value}}">
+
+      {{/each}}
+    </div>
+
+    <div class="modal-footer">
+      <a href="#" class="btn cancel">Cancel</a>
+      <a href="#" class="btn btn-primary save">Save</a>
     </div>
   </div>
 </template>
