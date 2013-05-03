@@ -12,6 +12,12 @@ Meteor.startup(function () {
       {name: "Lipsum Principles",
        desc: "Initial data for a story, example data #3.",
        value: 1
+      },
+      {name: "Aenean Tristique Inceptos",
+       desc: "Sed posuere consectetur est at lobortis, example data #4.",
+       resp: "Lasse Karlsson",
+       value: 1,
+       tags: "hello, again, dude"
       }
     ];
 

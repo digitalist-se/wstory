@@ -84,12 +84,15 @@
       <label>Ansvarig</label>
       <input type="text" class="title span5" name="responsible">
 
-      <label for='photo' >Ladda upp bild</label>
+      <label for='photo'>Ladda upp bild</label>
       <input type="file" name='newupload' id='newupload' />
       <span id='contactus_newupload_errorloc' class='error'></span>
 
       <label>Utfall</label>
-      <input type="text" class="title span2">
+      <div class="input-append">
+        <input type="text" class="title span2" id="appendedInput" >
+        <span class="add-on"> h</span>
+      </div>
 
       <label>Taggar</label>
     </div>
@@ -111,22 +114,23 @@
     </div>
 
     <div class="modal-body">
-
-      <p class="description">{{desc}}</p>
+      <div class="well">
+        <p class="description">{{desc}}</p>
+      </div>
 
       <strong>Ansvarig:</strong>
       <p>{{resp}}</p>
 
-
-      <strong>Utfall</strong>
+      <strong>Utfall:</strong>
       <p>{{value}} h</p>
 
-      {{/each}}
+      <p>{{tags}}</p>
     </div>
 
     <div class="modal-footer">
-      <a href="#" class="btn cancel">Cancel</a>
-      <a href="#" class="btn btn-primary save">Save</a>
+      <a href="#" class="btn cancel">Stäng</a>
+      <!--<a href="#" class="btn btn-primary save">Save</a>-->
     </div>
+    {{/each}}
   </div>
 </template>
