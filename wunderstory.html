@@ -65,21 +65,28 @@
   <div class="modal">
     <div class="modal-header">
       <button type="button" class="close cancel">&times;</button>
-      <h3>Add party</h3>
+      <h3>Lägg till story</h3>
     </div>
 
     <div class="modal-body">
 
-      <label>Title</label>
-      <input type="text" class="title span5">
+      <label>Titel</label>
+      <input type="text" class="title span5" name="title">
 
-      <label>Description</label>
-      <textarea class="description span5"></textarea>
+      <label>Beskrivning</label>
+      <textarea class="description span5" name="description"></textarea>
 
-      <label class="checkbox">
-        <input type="checkbox" class="private">
-        Private party &mdash; invitees only
-      </label>
+      <label>Ansvarig</label>
+      <input type="text" class="title span5" name="responsible">
+
+      <label for='photo' >Ladda upp bild</label>
+      <input type="file" name='newupload' id='newupload' />
+      <span id='contactus_newupload_errorloc' class='error'></span>
+
+      <label>Utfall</label>
+      <input type="text" class="title span2">
+
+      <label>Taggar</label>
     </div>
 
     <div class="modal-footer">
