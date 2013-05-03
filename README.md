@@ -1,4 +1,4 @@
-wstory
+Wunderstories (http://wunderstories.meteor.com)
 ======
 
 Wunderstories Meteor Application
