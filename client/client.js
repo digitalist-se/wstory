@@ -1,13 +1,14 @@
-if (Meteor.isClient) {
-  Template.navigation.events({
-    'click button' : function () {
-      openCreateDialog();
-    },
-    'keyup input' : function (e) {
-      console.log($(e.target).val());
-    }
-  })
-}
+
+Meteor.subscribe("stories");
+
+Template.navigation.events({
+  'click button' : function () {
+    openCreateDialog();
+  },
+  'keyup input' : function (e) {
+    console.log($(e.target).val());
+  }
+});
 
 var openCreateDialog = function () {
   Session.set("showCreateDialog", true);
