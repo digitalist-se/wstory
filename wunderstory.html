@@ -80,7 +80,7 @@
   <div class="mask"> </div>
   <div class="modal">
     <div class="modal-header">
-      <button type="button" class="close cancel">&times;</button>
+      <button type="button" class="btn btn-small close cancel">&times;</button>
       {{#if story}}
       <h3>Redigera story</h3>
       {{else}}
@@ -167,7 +167,9 @@
     {{#each stories}}
     <div class="modal-header">
       <button type="button" class="btn btn-small close cancel">&times;</button>
+      {{#if loggedIn}}
       <a class="btn btn-primary edit">Redigera</a>
+      {{/if}}
       <h3>{{name}}</h3>
     </div>
 
@@ -186,8 +188,12 @@
     {{/each}}
 
     <div class="modal-footer">
+      {{#if loggedIn}}
       <a href="#" class="btn cancel">Cancel</a>
       <a href="#" class="btn btn-primary save">Save</a>
+      {{else}}
+      <a href="#" class="btn cancel">Close</a>
+      {{/if}}
     </div>
   </div>
 </template>

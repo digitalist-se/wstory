@@ -97,8 +97,13 @@ Template.viewDialog.stories = function () {
   return Stories.find(Session.get("selected"));
 };
 
+Template.viewDialog.loggedIn = function() {
+  return Meteor.userId();
+};
+
 Template.viewDialog.events({
   'click .save': function (event, template) {
+    Session.set("selected", null);
     Session.set("showViewDialog", false);
   },
   'click .edit': function () {
@@ -106,6 +111,7 @@ Template.viewDialog.events({
     Session.set("showCreateDialog", true);
   },
   'click .cancel': function () {
+    Session.set("selected", null);
     Session.set("showViewDialog", false);
   }
 });
