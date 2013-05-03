@@ -75,7 +75,7 @@ body {
 }
 
 .mask {
-  position: absolute;
+  position: fixed;
   width: 100%;
   height: 100%;
   top: 0px;
@@ -89,10 +89,26 @@ body {
   z-index: 0;
 }
 
+.create-another {
+  display: inline-block;
+  color: #666;
+  margin-right: 10px;
+  input {
+    margin: 0;
+    margin-right: 2px;
+  }
+}
+
 /* Modals */
 button.close {
   float: right;
 }
+
+.btn.edit {
+  float: right;
+  margin-right: 10px;
+}
+
 p.description {
   font-size: 1.2em;
 }

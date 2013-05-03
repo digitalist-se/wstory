@@ -17,7 +17,7 @@ Meteor.startup(function () {
        desc: "Sed posuere consectetur est at lobortis, example data #4.",
        resp: "Lasse Karlsson",
        value: 1,
-       tags: "hello, again, dude"
+       tags: [{name: 'hej'}, {name: 'o'}, {name: 'hå'}]
       }
     ];
 

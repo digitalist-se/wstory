@@ -5,16 +5,22 @@ var storiesHandle = Meteor.subscribe('stories');
 
 Template.navigation.events({
   'click button' : function () {
+    Session.set("createError", null);
     openCreateDialog();
   },
-  'keyup input' : function (e) {
+  'keyup input#search' : function (e) {
     console.log($(e.target).val());
   }
 });
 
+Template.navigation.loggedIn = function() {
+  return Meteor.userId();
+};
+
 Template.main.events({
   'click tr' : function(event) {
     Session.set('selected', this._id);
+    Session.set("createError", null);
     openViewDialog();
   }
 });
@@ -39,49 +45,73 @@ Template.main.stories = function () {
   return Stories.find({}, {sort: {value: 1}});
 };
 
+Template.createDialog.story = function () {
+  return Stories.findOne(Session.get("selected"));
+};
+
 
 Template.createDialog.events({
   'click .save': function (event, template) {
     var title = template.find(".title").value;
     var description = template.find(".description").value;
-    var public = ! template.find(".private").checked;
-    var coords = Session.get("createCoords");
-
-//    if (title.length && description.length) {
-//      Meteor.call('createParty', {
-//        title: title,
-//        description: description,
-//        x: coords.x,
-//        y: coords.y,
-//        public: public
-//      }, function (error, party) {
-//        if (! error) {
-//          Session.set("selected", party);
-//          if (! public && Meteor.users.find().count() > 1)
-//            openInviteDialog();
-//        }
-//      });
-//      Session.set("showCreateDialog", false);
-//    } else {
-//      Session.set("createError",
-//                  "It needs a title and a description, or why bother?");
-//    }
+    var create_another = template.find("#create-another").value;
+    if (title.length && description.length) {
+      Meteor.call('createStory', {
+        name: title,
+        desc: description
+      }, function (error, story) {
+        if (!error) {
+          Session.set("selected", null);
+        }
+      });
+      Session.set("showCreateDialog", false);
+      if (create_another) {
+        Session.set("createError", null);
+        Session.set("showCreateDialog", true);
+      }
+    } else {
+      Session.set("createError",
+                  "En story behöver en titel och en beskrivning, varför annars bry sig?");
+    }
   },
 
   'click .cancel': function () {
+    Session.set("selected", null);
     Session.set("showCreateDialog", false);
   }
 });
+
+Template.createDialog.error = function () {
+  return Session.get("createError");
+};
+
+Template.createDialog.owner = function () {
+  var owner = Meteor.users.findOne(this.owner);
+  if (!owner) {
+    return '';
+  }
+  return displayName(owner);
+};
 
 Template.viewDialog.stories = function () {
   return Stories.find(Session.get("selected"));
 };
 
+Template.viewDialog.loggedIn = function() {
+  return Meteor.userId();
+};
+
 Template.viewDialog.events({
   'click .save': function (event, template) {
+    Session.set("selected", null);
+    Session.set("showViewDialog", false);
   },
-
+  'click .edit': function () {
+    Session.set("showViewDialog", false);
+    Session.set("showCreateDialog", true);
+  },
   'click .cancel': function () {
+    Session.set("selected", null);
     Session.set("showViewDialog", false);
   }
 });
