@@ -10,10 +10,10 @@
 
 <template name="modals">
   {{#if showCreateDialog}}
-    {{> createDialog}}
+  {{> createDialog}}
   {{/if}}
   {{#if showViewDialog}}
-    {{> viewDialog}}
+  {{> viewDialog}}
   {{/if}}
 </template>
 
@@ -27,6 +27,7 @@
           <th>Titel</th>
           <th>Beskrivning</th>
           <th>Utfall</th>
+          <th>Taggar</th>
         </tr>
       </thead>
       <tbody>
@@ -36,6 +37,11 @@
           <td>{{name}}</td>
           <td>{{desc}}</td>
           <td>{{value}}</td>
+          <td>
+            {{#each tags}}
+            <span>{{name}}</span>
+            {{/each}}
+          </td>
         </tr>
         {{/each}}
       </tbody>
@@ -53,11 +59,16 @@
               <img src="http://wunderstories.dev/profiles/wunderstories/themes/custom/wunderstories/logo.png" alt="Hem">
             </a>
           </div>
+          {{#if loggedIn}}
           <div class="span2 pull-left">
             <button class="btn btn-inverse">Skapa Story</button>
           </div>
+          {{/if}}
+          <div class="span2 pull-right align-right">
+            {{loginButtons}}
+          </div>
           <form class="span3 navbar-search pull-right">
-            <input type="text" class="search-query" placeholder="Sök stories">
+            <input type="text" class="search-query" id="search" placeholder="Sök stories">
           </form>
         </div>
       </section>
@@ -70,16 +81,53 @@
   <div class="modal">
     <div class="modal-header">
       <button type="button" class="close cancel">&times;</button>
+      {{#if story}}
+      <h3>Redigera story</h3>
+      {{else}}
       <h3>Lägg till story</h3>
+      {{/if}}
     </div>
 
     <div class="modal-body">
+      
+      {{#if error}}
+      <div class="alert alert-error">{{error}}</div>
+      {{/if}}
+
+      {{#if story}}
+      {{#with story}}
+
+      <label>Titel</label>
+      <input type="text" class="title span5" name="title" value="{{name}}">
+
+      <label>Beskrivning</label>
+      <textarea class="description span5" name="description">{{desc}}</textarea>
+
+      <label>Ansvarig</label>
+      <input type="text" class="title span5" name="responsible" value="{{owner}}">
+
+      <label for='photo' >Ladda upp bild</label>
+      <input type="file" name='newupload' id='newupload' />
+      <span id='contactus_newupload_errorloc' class='error'></span>
+
+      <label>Utfall</label>
+      <input type="text" class="title span2" value="{{value}}">
+
+      <label>Taggar</label>
+      <select>
+        {{#each tags}}
+        <option>{{name}}</option>
+        {{/each}}
+      </select>
+
+      {{/with}}
+      {{else}}
 
       <label>Titel</label>
       <input type="text" class="title span5" name="title">
 
       <label>Beskrivning</label>
-      <textarea class="description span5" name="description"></textarea>
+      <textarea class="description span5" name="description">{{desc}}</textarea>
 
       <label>Ansvarig</label>
       <input type="text" class="title span5" name="responsible">
@@ -92,11 +140,23 @@
       <input type="text" class="title span2">
 
       <label>Taggar</label>
+
+      {{/if}}
     </div>
 
     <div class="modal-footer">
+      {{#if story}}
+      <a href="#" class="btn cancel">Avbryt</a>
+      <a href="#" class="btn btn-danger remove">Ta bort</a>
+      <a href="#" class="btn btn-primary save">Spara</a>
+      {{else}}
+      <label for="create-another" class="create-another">
+        <input id="create-another" type="checkbox">
+        Skapa en till
+      </label>
       <a href="#" class="btn cancel">Avbryt</a>
       <a href="#" class="btn btn-primary save">Lägg till story</a>
+      {{/if}}
     </div>
   </div>
 </template>

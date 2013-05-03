@@ -11,7 +11,8 @@ Meteor.startup(function () {
       },
       {name: "Lipsum Principles",
        desc: "Initial data for a story, example data #3.",
-       value: 1
+       value: 1,
+       tags: [{name: 'hej'}, {name: 'o'}, {name: 'hå'}]
       }
     ];
 
