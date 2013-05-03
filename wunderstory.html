@@ -1,0 +1,90 @@
+<head>
+  <title>wunderstory</title>
+</head>
+
+<body>
+  {{> modals }}
+  {{> navigation}}
+  {{> main}}
+</body>
+
+<template name="modals">
+  {{#if showCreateDialog}}
+    {{> createDialog}}
+  {{/if}}
+</template>
+
+<template name="main">
+  <section class="main container">
+    <h1>Stories</h1>
+    <table class="table table-striped table-hover">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Titel</th>
+          <th>Beskrivning</th>
+          <th>Utfall</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>1</td>
+          <td>Lipsum</td>
+          <td>Lorem ipsum dolar sit amet</td>
+          <td>4</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+</template>
+
+<template name="navigation">
+  <nav class="navbar navbar-fixed-top">
+    <div class="navbar-inner">
+      <section class="container">
+        <div class="row-fluid">
+          <div class="span1 logo">
+            <a href="/" title="Hem" rel="home" id="logo">
+              <img src="http://wunderstories.dev/profiles/wunderstories/themes/custom/wunderstories/logo.png" alt="Hem">
+            </a>
+          </div>
+          <div class="span2 pull-left">
+            <button class="btn btn-inverse">Skapa Story</button>
+          </div>
+          <form class="span3 navbar-search pull-right">
+            <input type="text" class="search-query" placeholder="Sök stories">
+          </form>
+        </div>
+      </section>
+    </div>
+  </nav>
+</template>
+
+<template name="createDialog">
+  <div class="mask"> </div>
+  <div class="modal">
+    <div class="modal-header">
+      <button type="button" class="close cancel">&times;</button>
+      <h3>Add party</h3>
+    </div>
+
+    <div class="modal-body">
+
+      <label>Title</label>
+      <input type="text" class="title span5">
+
+      <label>Description</label>
+      <textarea class="description span5"></textarea>
+
+      <label class="checkbox">
+        <input type="checkbox" class="private">
+        Private party &mdash; invitees only
+      </label>
+    </div>
+
+    <div class="modal-footer">
+      <a href="#" class="btn cancel">Cancel</a>
+      <a href="#" class="btn btn-primary save">Add party</a>
+    </div>
+  </div>
+</template>
