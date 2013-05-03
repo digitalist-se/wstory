@@ -21,7 +21,7 @@ Template.main.events({
   'click tr' : function(event) {
     Session.set('selected', this._id);
     Session.set("createError", null);
-    openCreateDialog();
+    openViewDialog();
   }
 });
 
@@ -101,7 +101,10 @@ Template.viewDialog.events({
   'click .save': function (event, template) {
     Session.set("showViewDialog", false);
   },
-
+  'click .edit': function () {
+    Session.set("showViewDialog", false);
+    Session.set("showCreateDialog", true);
+  },
   'click .cancel': function () {
     Session.set("showViewDialog", false);
   }
